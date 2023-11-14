@@ -1,11 +1,9 @@
 
-def read_user_choice():
-    """
-    Imprime un menu de instrucciones y lee la respuesta del usuario
-    mediante una llamada a `input`.
-    Devuelve lo que haya elegido el usario
-    """
-    return None # un "sí para que calles"
+INVALIDE = -1
+ROCK = 0
+PAPER = 1
+SCISSORS = 2
+QUIT = 3
 
 def is_exit(user_choice):
     """
@@ -57,3 +55,43 @@ def game_loop():
         else:
             # el humano es un gallina: salgo
             break
+
+def read_user_choice():
+    """
+    Imprime un menu de instrucciones y lee la respuesta del usuario
+    mediante una llamada a `input`.
+    Devuelve lo que haya elegido el usario
+    """
+
+    user_answer = INVALIDE
+
+    while True:
+
+        print('Select one option:')
+        print(f'{ROCK}.- Rock')
+        print(f'{PAPER}.- Paper')
+        print(f'{SCISSORS}.- Scissors')
+        print('************************')
+        print(f'{QUIT}. I don´t want play again')
+
+        try:
+            user_answer = int(input('Choice your option: '))
+        except ValueError:
+            user_answer = INVALIDE
+
+        if user_answer in range(0, 4):
+            break
+        else:
+            user_answer = INVALIDE
+
+    return user_answer
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    game_loop()
