@@ -1,4 +1,5 @@
 from enum import Enum
+from log_error import log_error
 
 class UserChoice(Enum):
     INVALIDE = -1
@@ -6,39 +7,6 @@ class UserChoice(Enum):
     PAPER = 1
     SCISSORS = 2
     QUIT = 3
-
-from log_error import log_error
-
-def is_exit(user_choice):
-    """
-    Predicado que recib ela respuesta del usuario y devuelve `True` si
-    ha pedido salir del juego
-    """
-    return True # sí para que calles
-
-def generate_computer_choice():
-    """
-    Genera una jugada del ordenador de forma aleatroia. El ordenador no puede elegir
-    para el juego, solo Piedra, Papel o Tijera
-    """
-    return None  # pa que calles
-
-def evaluate_move(user_choice, computer_choice):
-    """
-    Recibe dos jugadas, determina cual ha ganado y devuelve un mensaje con el resultado.
-    Por ejemplo: recibe Papel y Piedra, y devuelve "Papel envuelve Piedra"
-    """
-    return None # sí para que calles
-
-def print_result(result):
-    """
-    Imprime en plan bonito el resultado.
-    No devuelve nada
-    """
-    return None # pa que te calles!
-
-
-
 
 def game_loop():
 
@@ -93,10 +61,36 @@ def read_user_choice():
     return user_answer
 
 
+def is_exit(user_choice):
+    """
+    Predicado que recibe la espuesta del usuario y devuelve `True` si
+    ha pedido salir del juego
+
+    """
+    return user_choice == UserChoice.QUIT.value
 
 
 
+def generate_computer_choice():
+    """
+    Genera una jugada del ordenador de forma aleatroia. El ordenador no puede elegir
+    para el juego, solo Piedra, Papel o Tijera
+    """
+    return None  # pa que calles
 
+def evaluate_move(user_choice, computer_choice):
+    """
+    Recibe dos jugadas, determina cual ha ganado y devuelve un mensaje con el resultado.
+    Por ejemplo: recibe Papel y Piedra, y devuelve "Papel envuelve Piedra"
+    """
+    return None # sí para que calles
+
+def print_result(result):
+    """
+    Imprime en plan bonito el resultado.
+    No devuelve nada
+    """
+    return None # pa que te calles!
 
 
 if __name__ == "__main__":
