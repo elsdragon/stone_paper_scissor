@@ -1,9 +1,11 @@
+from enum import Enum
 
-INVALIDE = -1
-ROCK = 0
-PAPER = 1
-SCISSORS = 2
-QUIT = 3
+class UserChoice(Enum):
+    INVALIDE = -1
+    ROCK = 0
+    PAPER = 1
+    SCISSORS = 2
+    QUIT = 3
 
 from log_error import log_error
 
@@ -65,26 +67,28 @@ def read_user_choice():
     Devuelve lo que haya elegido el usario
     """
 
-    user_answer = INVALIDE
+    user_answer = UserChoice.INVALIDE
 
     while True:
 
         print('Select one option:')
-        print(f'{ROCK}.- Rock')
-        print(f'{PAPER}.- Paper')
-        print(f'{SCISSORS}.- Scissors')
+        print(f'{UserChoice.ROCK.value}.- Rock')
+        print(f'{UserChoice.PAPER.value}.- Paper')
+        print(f'{UserChoice.SCISSORS.value}.- Scissors')
         print('************************')
-        print(f'{QUIT}. I don´t want play again')
+        print(f'{UserChoice.QUIT.value}. I don´t want play again')
 
         try:
             user_answer = int(input('Choice your option: '))
-        except ValueError:
-            user_answer = INVALIDE
+        except ValueError as err:
+            user_answer = UserChoice.INVALIDE
+            log_error(err)
+            print(err)
 
-        if user_answer in range(0, 4):
+        if user_answer != UserChoice.INVALIDE:
             break
         else:
-            user_answer = INVALIDE
+            user_answer = UserChoice.INVALIDE
 
     return user_answer
 
@@ -100,3 +104,4 @@ if __name__ == "__main__":
         game_loop()
     except Exception as error:
         log_error(error)
+        print(error)
