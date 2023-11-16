@@ -5,6 +5,8 @@ PAPER = 1
 SCISSORS = 2
 QUIT = 3
 
+from log_error import log_error
+
 def is_exit(user_choice):
     """
     Predicado que recib ela respuesta del usuario y devuelve `True` si
@@ -94,4 +96,7 @@ def read_user_choice():
 
 
 if __name__ == "__main__":
-    game_loop()
+    try:
+        game_loop()
+    except Exception as error:
+        log_error(error)
