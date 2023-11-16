@@ -78,7 +78,7 @@ def generate_computer_choice():
     para el juego, solo Piedra, Papel o Tijera
     """
     from random import choice
-    return choice([GameChoice.ROCK.value, GameChoice.PAPER.value, GameChoice.SCISSORS.value])
+    return choice([GameChoice.ROCK, GameChoice.PAPER, GameChoice.SCISSORS])
 
 def evaluate_move(user_choice, computer_choice):
     """
