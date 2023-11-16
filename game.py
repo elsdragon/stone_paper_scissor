@@ -1,5 +1,6 @@
 from enum import Enum
 from log_error import log_error
+from random import choice
 
 class UserChoice(Enum):
     INVALIDE = -1
@@ -76,7 +77,7 @@ def generate_computer_choice():
     Genera una jugada del ordenador de forma aleatroia. El ordenador no puede elegir
     para el juego, solo Piedra, Papel o Tijera
     """
-    return None  # pa que calles
+    return choice([UserChoice.ROCK.value, UserChoice.PAPER.value, UserChoice.SCISSORS.value])
 
 def evaluate_move(user_choice, computer_choice):
     """
