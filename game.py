@@ -84,7 +84,34 @@ def evaluate_move(user_choice, computer_choice):
     Recibe dos jugadas, determina cual ha ganado y devuelve un mensaje con el resultado.
     Por ejemplo: recibe Papel y Piedra, y devuelve "Papel envuelve Piedra"
     """
-    return None # sí para que calles
+    assert user_choice != UserChoice.INVALIDE and user_choice != UserChoice.QUIT
+    assert computer_choice != UserChoice.INVALIDE and computer_choice != UserChoice.QUIT
+
+    result = ""
+    if user_choice == UserChoice.ROCK.value:
+        if computer_choice == UserChoice.PAPER.value:
+            result = "You lose!!! Paper wins rock."
+        elif computer_choice == UserChoice.SCISSORS.value:
+            result = "YOU WIN!!!! Rock wins Scissors."
+        elif computer_choice == UserChoice.ROCK.value:
+            result = "You tie!!!!"
+    elif user_choice == UserChoice.PAPER.value:
+        if computer_choice == UserChoice.ROCK.value:
+            result = "YOU WIN!!! Paper wins Rock"
+        elif computer_choice == UserChoice.SCISSORS.value:
+            result = "You lose!!! Scissors wins Paper"
+        else:
+            result = "You tie!!!!"
+    elif user_choice == UserChoice.SCISSORS.value:
+        if computer_choice == UserChoice.PAPER.value:
+            result = "YOU WIN!!! Scissors wins Paper."
+        elif computer_choice == UserChoice.ROCK.value:
+            result = "You lose!!! Rock wins Scissors."
+        else:
+            result = "You tie!!!!"
+
+
+    return result
 
 def print_result(result):
     """
