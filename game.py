@@ -1,8 +1,8 @@
 from enum import Enum
 from log_error import log_error
-from random import choice
 
-class UserChoice(Enum):
+
+class GameChoice(Enum):
     INVALIDE = -1
     ROCK = 0
     PAPER = 1
@@ -36,28 +36,28 @@ def read_user_choice():
     Devuelve lo que haya elegido el usario
     """
 
-    user_answer = UserChoice.INVALIDE
+    user_answer = GameChoice.INVALIDE
 
     while True:
 
         print('Select one option:')
-        print(f'{UserChoice.ROCK.value}.- Rock')
-        print(f'{UserChoice.PAPER.value}.- Paper')
-        print(f'{UserChoice.SCISSORS.value}.- Scissors')
+        print(f'{GameChoice.ROCK.value}.- Rock')
+        print(f'{GameChoice.PAPER.value}.- Paper')
+        print(f'{GameChoice.SCISSORS.value}.- Scissors')
         print('************************')
-        print(f'{UserChoice.QUIT.value}. I don´t want play again')
+        print(f'{GameChoice.QUIT.value}. I don´t want play again\n')
 
         try:
-            user_answer = int(input('Choice your option: '))
+            user_answer = GameChoice(int(input('Choice your option: ')))
         except ValueError as err:
-            user_answer = UserChoice.INVALIDE
+            user_answer = GameChoice.INVALIDE
             log_error(err)
-            print(err)
+            
 
-        if user_answer != UserChoice.INVALIDE:
+        if user_answer != GameChoice.INVALIDE:
             break
         else:
-            user_answer = UserChoice.INVALIDE
+            user_answer = GameChoice.INVALIDE
 
     return user_answer
 
@@ -68,7 +68,7 @@ def is_exit(user_choice):
     ha pedido salir del juego
 
     """
-    return user_choice == UserChoice.QUIT.value
+    return user_choice == GameChoice.QUIT.value
 
 
 
@@ -77,40 +77,41 @@ def generate_computer_choice():
     Genera una jugada del ordenador de forma aleatroia. El ordenador no puede elegir
     para el juego, solo Piedra, Papel o Tijera
     """
-    return choice([UserChoice.ROCK.value, UserChoice.PAPER.value, UserChoice.SCISSORS.value])
+    from random import choice
+    return choice([GameChoice.ROCK.value, GameChoice.PAPER.value, GameChoice.SCISSORS.value])
 
 def evaluate_move(user_choice, computer_choice):
     """
     Recibe dos jugadas, determina cual ha ganado y devuelve un mensaje con el resultado.
     Por ejemplo: recibe Papel y Piedra, y devuelve "Papel envuelve Piedra"
     """
-    assert user_choice != UserChoice.INVALIDE and user_choice != UserChoice.QUIT
-    assert computer_choice != UserChoice.INVALIDE and computer_choice != UserChoice.QUIT
+    assert user_choice != GameChoice.INVALIDE and user_choice != GameChoice.QUIT
+    assert computer_choice != GameChoice.INVALIDE and computer_choice != GameChoice.QUIT
 
     result = ""
-    if user_choice == UserChoice.ROCK.value:
-        if computer_choice == UserChoice.PAPER.value:
+    if user_choice == GameChoice.ROCK:
+        if computer_choice == GameChoice.PAPER:
             result = "You lose!!! Paper wins rock."
-        elif computer_choice == UserChoice.SCISSORS.value:
+        elif computer_choice == GameChoice.SCISSORS:
             result = "YOU WIN!!!! Rock wins Scissors."
-        elif computer_choice == UserChoice.ROCK.value:
+        elif computer_choice == GameChoice.ROCK:
             result = "You tie!!!!"
-    elif user_choice == UserChoice.PAPER.value:
-        if computer_choice == UserChoice.ROCK.value:
+    elif user_choice == GameChoice.PAPER:
+        if computer_choice == GameChoice.ROCK:
             result = "YOU WIN!!! Paper wins Rock"
-        elif computer_choice == UserChoice.SCISSORS.value:
+        elif computer_choice == GameChoice.SCISSORS:
             result = "You lose!!! Scissors wins Paper"
-        else:
+        elif computer_choice == GameChoice.PAPER:
             result = "You tie!!!!"
-    elif user_choice == UserChoice.SCISSORS.value:
-        if computer_choice == UserChoice.PAPER.value:
+    elif user_choice == GameChoice.SCISSORS:
+        if computer_choice == GameChoice.PAPER:
             result = "YOU WIN!!! Scissors wins Paper."
-        elif computer_choice == UserChoice.ROCK.value:
+        elif computer_choice == GameChoice.ROCK:
             result = "You lose!!! Rock wins Scissors."
-        else:
+        elif computer_choice == GameChoice.SCISSORS:
             result = "You tie!!!!"
 
-
+    assert result != ""
     return result
 
 def print_result(result):
@@ -118,7 +119,9 @@ def print_result(result):
     Imprime en plan bonito el resultado.
     No devuelve nada
     """
-    return None # pa que te calles!
+    print("GAME IS OVER!!!!\n")
+    print(result)
+    print("***************")
 
 
 if __name__ == "__main__":
