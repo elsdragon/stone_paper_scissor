@@ -8,7 +8,9 @@ class GameChoice(Enum):
     ROCK = 0
     PAPER = 1
     SCISSORS = 2
-    QUIT = 3
+    LIZARD = 3
+    SPOCK = 4
+    QUIT = 5
 
 def game_loop():
 
@@ -50,8 +52,10 @@ def read_user_choice():
         print(f'{GameChoice.ROCK.value}.- Rock')
         print(f'{GameChoice.PAPER.value}.- Paper')
         print(f'{GameChoice.SCISSORS.value}.- Scissors')
+        print(f'{GameChoice.LIZARD.value}. Lagarto')
+        print(f'{GameChoice.SPOCK.value}. Spock')
         print('************************')
-        print(f'{GameChoice.QUIT.value}. I don´t want play again\n')
+        print(f'{GameChoice.QUIT.value}. I don´t want play again.')
 
         try:
             user_answer = GameChoice(int(input('Choice your option: ')))
@@ -79,7 +83,7 @@ def generate_computer_choice():
     para el juego, solo Piedra, Papel o Tijera
     """
     
-    return choice([GameChoice.ROCK, GameChoice.PAPER, GameChoice.SCISSORS])
+    return choice([GameChoice.ROCK, GameChoice.PAPER, GameChoice.SCISSORS, GameChoice.LIZARD, GameChoice.SPOCK])
 
 def evaluate_move(user_choice, computer_choice):
     """
@@ -89,12 +93,16 @@ def evaluate_move(user_choice, computer_choice):
     assert user_choice != GameChoice.INVALIDE and user_choice != GameChoice.QUIT
     assert computer_choice != GameChoice.INVALIDE and computer_choice != GameChoice.QUIT
 
-    winner = {GameChoice.PAPER: GameChoice.ROCK, GameChoice.ROCK: GameChoice.SCISSORS, GameChoice.SCISSORS:GameChoice.PAPER}
+    winner = {GameChoice.PAPER: [GameChoice.ROCK, GameChoice.SPOCK], 
+              GameChoice.ROCK: [GameChoice.SCISSORS, GameChoice.LIZARD],
+              GameChoice.SCISSORS:[GameChoice.PAPER, GameChoice.LIZARD],
+              GameChoice.LIZARD: [GameChoice.PAPER, GameChoice.SPOCK],
+              GameChoice.SPOCK: [GameChoice.ROCK, GameChoice.SCISSORS]}
    
     result = ""
     if user_choice == computer_choice:
         result = "You tie!!!!"
-    elif winner[user_choice] == computer_choice:
+    elif computer_choice in winner[user_choice]:
         result = "YOU WINN!!!!"
     else:
         result = "YOU LOSE!!!!"
@@ -110,6 +118,10 @@ def print_choice(choice):
         print("PAPEL")
     elif choice == GameChoice.SCISSORS:
         print("TIJERAS")
+    elif choice == GameChoice.LIZARD:
+        print("LAGARTO")
+    elif choice == GameChoice.SPOCK:
+        print("SPOCK")
 
 def print_result(result):
     """
