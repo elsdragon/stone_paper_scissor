@@ -3,11 +3,11 @@ import pytest
 from game import evaluate_move, generate_computer_choice, is_exit, GameChoice
 
 def test_is_exit():
-    assert is_exit(3) == True
-    assert is_exit(-1) == False
-    assert is_exit(0) == False
-    assert is_exit(1) == False
-    assert is_exit(2) == False
+    assert is_exit(GameChoice.QUIT) == True
+    assert is_exit(GameChoice.INVALIDE) == False
+    assert is_exit(GameChoice.ROCK) == False
+    assert is_exit(GameChoice.PAPER) == False
+    assert is_exit(GameChoice.SCISSORS) == False
 
 def test_generate_computer_choice():
     assert generate_computer_choice() == 0 or 1 or 2

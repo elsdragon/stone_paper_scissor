@@ -68,7 +68,7 @@ def is_exit(user_choice):
     ha pedido salir del juego
 
     """
-    return user_choice == GameChoice.QUIT.value
+    return user_choice == GameChoice.QUIT
 
 
 
