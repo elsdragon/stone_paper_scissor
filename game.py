@@ -18,10 +18,15 @@ def game_loop():
     while True:
         # Leo la selección del usuario (piedra, papel, tijera o parar el juego)
         user_choice = read_user_choice()
+        
         # Siempre y cuando no quiera parar
         if not is_exit(user_choice):
+            print("Has jugado: ")
+            print_choice(user_choice)
             # genero una jugada del ordenador
             comp_choice = generate_computer_choice()
+            print("El ordenador a jugado: ")
+            print_choice(comp_choice)
             # evalúo la jugada
             result = evaluate_move(user_choice, comp_choice)
             # muestro el ganador en pantalla y vuelta al principio
@@ -84,35 +89,34 @@ def evaluate_move(user_choice, computer_choice):
     assert user_choice != GameChoice.INVALIDE and user_choice != GameChoice.QUIT
     assert computer_choice != GameChoice.INVALIDE and computer_choice != GameChoice.QUIT
 
+    winner = {GameChoice.PAPER: GameChoice.ROCK, GameChoice.ROCK: GameChoice.SCISSORS, GameChoice.SCISSORS:GameChoice.PAPER}
+   
     result = ""
     if user_choice == computer_choice:
-            result = "You tie!!!!"
-    elif user_choice == GameChoice.ROCK:
-        if computer_choice == GameChoice.PAPER:
-            result = "You lose!!! Paper wins rock."
-        elif computer_choice == GameChoice.SCISSORS:
-            result = "YOU WIN!!!! Rock wins Scissors."
-    elif user_choice == GameChoice.PAPER:
-        if computer_choice == GameChoice.ROCK:
-            result = "YOU WIN!!! Paper wins Rock"
-        elif computer_choice == GameChoice.SCISSORS:
-            result = "You lose!!! Scissors wins Paper"
-    elif user_choice == GameChoice.SCISSORS:
-        if computer_choice == GameChoice.PAPER:
-            result = "YOU WIN!!! Scissors wins Paper."
-        elif computer_choice == GameChoice.ROCK:
-            result = "You lose!!! Rock wins Scissors."
-
+        result = "You tie!!!!"
+    elif winner[user_choice] == computer_choice:
+        result = "YOU WINN!!!!"
+    else:
+        result = "YOU LOSE!!!!"
 
     assert result != ""
     return result
+
+def print_choice(choice):
+
+    if choice == GameChoice.ROCK:
+        print("PIEDRA")
+    elif choice == GameChoice.PAPER:
+        print("PAPEL")
+    elif choice == GameChoice.SCISSORS:
+        print("TIJERAS")
 
 def print_result(result):
     """
     Imprime en plan bonito el resultado.
     No devuelve nada
     """
-    print("GAME IS OVER!!!!\n")
+    print("GAME IS OVER!!!!")
     print(result)
     print("***************")
 
