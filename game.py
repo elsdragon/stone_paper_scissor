@@ -1,5 +1,6 @@
 from enum import Enum
 from log_error import log_error
+from random import choice
 
 
 class GameChoice(Enum):
@@ -38,7 +39,7 @@ def read_user_choice():
 
     user_answer = GameChoice.INVALIDE
 
-    while True:
+    while user_answer == GameChoice.INVALIDE:
 
         print('Select one option:')
         print(f'{GameChoice.ROCK.value}.- Rock')
@@ -53,11 +54,6 @@ def read_user_choice():
             user_answer = GameChoice.INVALIDE
             log_error(err)
             
-
-        if user_answer != GameChoice.INVALIDE:
-            break
-        else:
-            user_answer = GameChoice.INVALIDE
 
     return user_answer
 
@@ -77,7 +73,7 @@ def generate_computer_choice():
     Genera una jugada del ordenador de forma aleatroia. El ordenador no puede elegir
     para el juego, solo Piedra, Papel o Tijera
     """
-    from random import choice
+    
     return choice([GameChoice.ROCK, GameChoice.PAPER, GameChoice.SCISSORS])
 
 def evaluate_move(user_choice, computer_choice):
@@ -89,27 +85,24 @@ def evaluate_move(user_choice, computer_choice):
     assert computer_choice != GameChoice.INVALIDE and computer_choice != GameChoice.QUIT
 
     result = ""
-    if user_choice == GameChoice.ROCK:
+    if user_choice == computer_choice:
+            result = "You tie!!!!"
+    elif user_choice == GameChoice.ROCK:
         if computer_choice == GameChoice.PAPER:
             result = "You lose!!! Paper wins rock."
         elif computer_choice == GameChoice.SCISSORS:
             result = "YOU WIN!!!! Rock wins Scissors."
-        elif computer_choice == GameChoice.ROCK:
-            result = "You tie!!!!"
     elif user_choice == GameChoice.PAPER:
         if computer_choice == GameChoice.ROCK:
             result = "YOU WIN!!! Paper wins Rock"
         elif computer_choice == GameChoice.SCISSORS:
             result = "You lose!!! Scissors wins Paper"
-        elif computer_choice == GameChoice.PAPER:
-            result = "You tie!!!!"
     elif user_choice == GameChoice.SCISSORS:
         if computer_choice == GameChoice.PAPER:
             result = "YOU WIN!!! Scissors wins Paper."
         elif computer_choice == GameChoice.ROCK:
             result = "You lose!!! Rock wins Scissors."
-        elif computer_choice == GameChoice.SCISSORS:
-            result = "You tie!!!!"
+
 
     assert result != ""
     return result

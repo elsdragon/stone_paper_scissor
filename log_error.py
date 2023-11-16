@@ -4,6 +4,6 @@ import logging
 
 
 def log_error(error):
-    logging.basicConfig(filename='mi_programa.log', level=logging.DEBUG)
+    logging.basicConfig(filename='rock_paper_scissors_game.log', level=logging.DEBUG)
     logging.exception("Ocurrió una excepción")
     print(error)
