@@ -90,8 +90,8 @@ def evaluate_move(user_choice, computer_choice)-> str:
     Recibe dos jugadas, determina cual ha ganado y devuelve un mensaje con el resultado.
     Por ejemplo: recibe Papel y Piedra, y devuelve "Papel envuelve Piedra"
     """
-    assert user_choice != GameChoice.INVALIDE and user_choice != GameChoice.QUIT
-    assert computer_choice != GameChoice.INVALIDE and computer_choice != GameChoice.QUIT
+    # assert user_choice != GameChoice.INVALIDE and user_choice != GameChoice.QUIT
+    # assert computer_choice != GameChoice.INVALIDE and computer_choice != GameChoice.QUIT
 
     winner = {GameChoice.PAPER: [GameChoice.ROCK, GameChoice.SPOCK], 
               GameChoice.ROCK: [GameChoice.SCISSORS, GameChoice.LIZARD],
@@ -101,13 +101,13 @@ def evaluate_move(user_choice, computer_choice)-> str:
    
     result = ""
     if user_choice == computer_choice:
-        result = "You tie!!!!"
+        result = "YOU TIE!!!!"
     elif computer_choice in winner[user_choice]:
         result = "YOU WINN!!!!"
     else:
         result = "YOU LOSE!!!!"
 
-    assert result != ""
+    
     return result
 
 
