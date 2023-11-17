@@ -12,7 +12,7 @@ class GameChoice(Enum):
     SPOCK = 4
     QUIT = 5
 
-def game_loop():
+def game_loop()->None:
 
     """
     Arranca el bucle principal del juego
@@ -37,7 +37,7 @@ def game_loop():
             # el humano es un gallina: salgo
             break
 
-def read_user_choice():
+def read_user_choice()-> GameChoice:
     """
     Imprime un menu de instrucciones y lee la respuesta del usuario
     mediante una llamada a `input`.
@@ -67,7 +67,7 @@ def read_user_choice():
     return user_answer
 
 
-def is_exit(user_choice):
+def is_exit(user_choice)-> bool:
     """
     Predicado que recibe la espuesta del usuario y devuelve `True` si
     ha pedido salir del juego
@@ -77,7 +77,7 @@ def is_exit(user_choice):
 
 
 
-def generate_computer_choice():
+def generate_computer_choice()-> GameChoice:
     """
     Genera una jugada del ordenador de forma aleatroia. El ordenador no puede elegir
     para el juego, solo Piedra, Papel o Tijera
@@ -85,7 +85,7 @@ def generate_computer_choice():
     
     return choice([GameChoice.ROCK, GameChoice.PAPER, GameChoice.SCISSORS, GameChoice.LIZARD, GameChoice.SPOCK])
 
-def evaluate_move(user_choice, computer_choice):
+def evaluate_move(user_choice, computer_choice)-> str:
     """
     Recibe dos jugadas, determina cual ha ganado y devuelve un mensaje con el resultado.
     Por ejemplo: recibe Papel y Piedra, y devuelve "Papel envuelve Piedra"
@@ -110,7 +110,7 @@ def evaluate_move(user_choice, computer_choice):
     assert result != ""
     return result
 
-def print_choice(choice):
+def print_choice(choice)-> None:
 
     if choice == GameChoice.ROCK:
         print("PIEDRA")
@@ -123,7 +123,7 @@ def print_choice(choice):
     elif choice == GameChoice.SPOCK:
         print("SPOCK")
 
-def print_result(result):
+def print_result(result)-> None:
     """
     Imprime en plan bonito el resultado.
     No devuelve nada
