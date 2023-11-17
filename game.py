@@ -52,7 +52,7 @@ def read_user_choice()-> GameChoice:
         print(f'{GameChoice.ROCK.value}.- Rock')
         print(f'{GameChoice.PAPER.value}.- Paper')
         print(f'{GameChoice.SCISSORS.value}.- Scissors')
-        print(f'{GameChoice.LIZARD.value}. Lagarto')
+        print(f'{GameChoice.LIZARD.value}. Lizzard')
         print(f'{GameChoice.SPOCK.value}. Spock')
         print('************************')
         print(f'{GameChoice.QUIT.value}. I don´t want play again.')
