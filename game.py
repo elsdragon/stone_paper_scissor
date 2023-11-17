@@ -23,12 +23,12 @@ def game_loop()->None:
         
         # Siempre y cuando no quiera parar
         if not is_exit(user_choice):
-            print("Has jugado: ")
-            print_choice(user_choice)
+            print(f"Has jugado: {user_choice.name} ")
+            
             # genero una jugada del ordenador
             comp_choice = generate_computer_choice()
-            print("El ordenador a jugado: ")
-            print_choice(comp_choice)
+            print(f"El ordenador a jugado: {comp_choice.name}")
+           
             # evalúo la jugada
             result = evaluate_move(user_choice, comp_choice)
             # muestro el ganador en pantalla y vuelta al principio
@@ -110,18 +110,7 @@ def evaluate_move(user_choice, computer_choice)-> str:
     assert result != ""
     return result
 
-def print_choice(choice)-> None:
 
-    if choice == GameChoice.ROCK:
-        print("PIEDRA")
-    elif choice == GameChoice.PAPER:
-        print("PAPEL")
-    elif choice == GameChoice.SCISSORS:
-        print("TIJERAS")
-    elif choice == GameChoice.LIZARD:
-        print("LAGARTO")
-    elif choice == GameChoice.SPOCK:
-        print("SPOCK")
 
 def print_result(result)-> None:
     """
